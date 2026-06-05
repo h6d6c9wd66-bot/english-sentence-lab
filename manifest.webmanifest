@@ -1,0 +1,19 @@
+{
+  "name": "English Sentence Lab",
+  "short_name": "英语拆句",
+  "description": "Mobile-first English sentence learning lab with TTS, grammar breakdown, spaced repetition and local storage.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f4ef",
+  "theme_color": "#27665a",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
