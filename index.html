@@ -33,6 +33,7 @@
           <p class="section-kicker">今日 10 句</p>
           <h2>用真实句子建立长期记忆</h2>
           <p class="muted">点击句子听整句，点击单词查词。收藏后进入复习调度，逐步完成听懂、理解、造句和真实输出。</p>
+          <p class="muted mini-note" id="dailyPlanStatus">每日计划加载中...</p>
         </div>
         <div class="progress-card">
           <span>今日掌握</span>
@@ -43,6 +44,8 @@
 
       <nav class="tabs" aria-label="主要功能">
         <button class="tab active" data-view="home" type="button">首页</button>
+        <button class="tab" data-view="training" type="button">训练</button>
+        <button class="tab" data-view="lab" type="button">AI翻译</button>
         <button class="tab" data-view="review" type="button">复习</button>
         <button class="tab" data-view="sentences" type="button">句库</button>
         <button class="tab" data-view="words" type="button">单词</button>
@@ -61,6 +64,98 @@
 
       <section id="homeView" class="view active">
         <div class="sentence-list" id="sentenceList"></div>
+      </section>
+
+      <section id="trainingView" class="view">
+        <div class="panel training-panel">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Speak From Memory</p>
+              <h2>脱口训练</h2>
+            </div>
+            <span class="pill" id="trainingCount">0 句</span>
+          </div>
+          <p class="muted">先看中文和场景，自己开口说英文。说完再显示答案、听发音，并按真实表现打分。</p>
+
+          <label class="training-filter">
+            <span>训练场景</span>
+            <select id="trainingCategory"></select>
+          </label>
+
+          <article class="prompt-card" id="trainingCard">
+            <div class="card-top">
+              <span class="tag" id="trainingScene">场景</span>
+              <span class="tag" id="trainingLevel">难度</span>
+            </div>
+            <p class="prompt-label">请用英文脱口说出：</p>
+            <h3 id="trainingPrompt">加载中...</h3>
+            <div class="answer-panel" id="trainingAnswer">
+              <p class="section-kicker">参考表达</p>
+              <p class="result-main" id="trainingEnglish"></p>
+              <p class="muted" id="trainingPattern"></p>
+            </div>
+            <div class="card-actions">
+              <button class="ghost-btn" id="revealTrainingBtn" type="button">显示答案</button>
+              <button class="ghost-btn" id="speakTrainingBtn" type="button">朗读答案</button>
+              <button class="ghost-btn" id="nextTrainingBtn" type="button">下一句</button>
+            </div>
+            <div class="score-row">
+              <button class="stage-btn" data-training-score="fast" type="button">脱口说出</button>
+              <button class="stage-btn" data-training-score="slow" type="button">想了一下</button>
+              <button class="stage-btn" data-training-score="wrong" type="button">不会</button>
+            </div>
+          </article>
+
+          <div class="training-stats">
+            <div class="stat-mini">
+              <strong id="spokenCount">0</strong>
+              <span>已练</span>
+            </div>
+            <div class="stat-mini">
+              <strong id="fluentCount">0</strong>
+              <span>脱口</span>
+            </div>
+            <div class="stat-mini">
+              <strong id="stuckCount">0</strong>
+              <span>卡住</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="labView" class="view">
+        <div class="panel lab-panel">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">AI Expression Lab</p>
+              <h2>AI 翻译与纠错</h2>
+            </div>
+          </div>
+          <p class="muted">这里可以输入中文翻译成自然英文，也可以输入英文检查语法和表达。不填写接口也会优先使用在线翻译和在线纠错；填入 AI 代理接口后会优先使用 AI。</p>
+
+          <div class="lab-section">
+            <label for="aiEndpointInput">AI 代理接口地址（可选）</label>
+            <input id="aiEndpointInput" type="url" placeholder="例如：https://你的-worker.workers.dev/ai">
+            <button class="ghost-btn" id="saveAiEndpointBtn" type="button">保存接口</button>
+            <p class="muted mini-note">可以先不填。联网翻译和纠错会把输入内容发送到公开服务；不要输入隐私内容，也不要把 OpenAI API Key 写进网页。</p>
+          </div>
+
+          <div class="lab-section">
+            <label for="zhInput">输入中文</label>
+            <textarea id="zhInput" placeholder="例如：我在找附近的咖啡店 / 你能帮我拍张照吗？"></textarea>
+            <button class="primary-btn" id="translateBtn" type="button">在线翻译成自然英文</button>
+          </div>
+
+          <div class="lab-section">
+            <label for="enInput">输入英文</label>
+            <textarea id="enInput" placeholder="例如：I very like this / She go to work every day"></textarea>
+            <button class="primary-btn" id="correctBtn" type="button">在线纠错并解释</button>
+          </div>
+
+          <div class="lab-output" id="labOutput">
+            <p class="muted">结果会显示在这里。</p>
+          </div>
+        </div>
       </section>
 
       <section id="reviewView" class="view">

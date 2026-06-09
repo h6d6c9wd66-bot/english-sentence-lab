@@ -5,11 +5,13 @@
 ## 功能
 
 - 每日 10 条高频真实英语句子
-- 场景筛选与难度筛选
+- 场景筛选与难度筛选，筛选后显示该分类全部句子
 - 点击整句朗读，点击单词朗读和查词
 - 单词卡片：音标、词性、中文意思、句中含义、搭配、例句
 - 收藏句子与收藏单词
 - 本地“AI语法拆解”和“问AI”解释引擎
+- 表达实验室：中文转英文建议、英文纠错、语法拆解、朗读
+- AI 翻译/纠错接入：前端填写安全代理地址，优先走 AI，失败时本地规则兜底
 - 五阶段句子掌握系统
 - 间隔重复复习调度
 - 七天验证和长期掌握状态预留
@@ -26,6 +28,9 @@ english-sentence-lab/
   app.js
   manifest.webmanifest
   sw.js
+  ai-proxy/
+    cloudflare-worker.js
+    README.md
   icons/
     icon.svg
 ```
@@ -52,7 +57,7 @@ http://localhost:8080
 
 ## 后续扩展接口
 
-`app.js` 中的 `answerQuestion()` 当前是本地规则解释器。后续可以替换为真实 AI API：
+`app.js` 中的 `translateChinese()` 和 `correctEnglish()` 已支持 AI 代理接口；`ai-proxy/cloudflare-worker.js` 是 Cloudflare Worker 模板。不要把 OpenAI API Key 写入前端网页。
 
 - AI 口语陪练
 - 语音识别

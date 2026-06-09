@@ -193,16 +193,23 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 5;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
   gap: 6px;
   padding: 8px;
   margin: 0 -4px 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
   backdrop-filter: blur(18px);
   background: color-mix(in srgb, var(--bg) 78%, transparent);
 }
 
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
 .tab {
+  flex: 0 0 auto;
+  min-width: 70px;
   min-height: 38px;
   border: 1px solid transparent;
   border-radius: 10px;
@@ -281,7 +288,8 @@ textarea {
 .mastery-row,
 .panel-head,
 .word-head,
-.stage-row {
+.stage-row,
+.score-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -331,6 +339,7 @@ textarea {
   border: 0;
   padding: 0 1px;
   background: transparent;
+  font: inherit;
   color: inherit;
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -369,6 +378,13 @@ textarea {
   background: var(--paper-soft);
   color: var(--ink);
   cursor: pointer;
+}
+
+.ghost-btn:disabled,
+.primary-btn:disabled,
+.mini-btn:disabled {
+  opacity: 0.62;
+  cursor: default;
 }
 
 .primary-btn {
@@ -462,7 +478,8 @@ textarea {
   font-size: 13px;
 }
 
-.stage-row {
+.stage-row,
+.score-row {
   align-items: stretch;
   margin-top: 12px;
 }
@@ -532,6 +549,87 @@ textarea {
   padding-top: 8px;
 }
 
+.lab-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.lab-section {
+  display: grid;
+  gap: 9px;
+}
+
+.lab-section label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lab-output {
+  display: grid;
+  gap: 12px;
+}
+
+.mini-note {
+  margin: 0;
+  font-size: 12px;
+}
+
+.result-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper-soft);
+}
+
+.result-card h3 {
+  margin-bottom: 8px;
+}
+
+.result-main {
+  margin: 0 0 8px;
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.clickable-result {
+  word-break: break-word;
+}
+
+.phrase-panel {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 4px;
+}
+
+.phrase-panel:empty {
+  display: none;
+}
+
+.phrase-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.phrase-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.result-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .answer-box {
   min-height: 88px;
   padding: 12px;
@@ -540,6 +638,74 @@ textarea {
   background: var(--paper-soft);
   color: var(--muted);
   line-height: 1.65;
+}
+
+.training-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.training-filter {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.prompt-card {
+  display: grid;
+  gap: 14px;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper-soft);
+}
+
+.prompt-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+#trainingPrompt {
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.answer-panel {
+  display: none;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.answer-panel.open {
+  display: block;
+}
+
+.training-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat-mini {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper-soft);
+}
+
+.stat-mini strong {
+  display: block;
+  font-size: 22px;
+}
+
+.stat-mini span {
+  color: var(--muted);
+  font-size: 12px;
 }
 
 @media (max-width: 430px) {
@@ -569,7 +735,8 @@ textarea {
     width: 100%;
   }
 
-  .stage-row {
+  .stage-row,
+  .score-row {
     flex-direction: column;
   }
 }
